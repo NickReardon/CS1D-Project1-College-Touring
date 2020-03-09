@@ -22,11 +22,14 @@ public:
     void planAlgorithm(QString start);
     bool collegeDoesExist(QString colName);
     bool planDoesExist(QString colName);
+    void updateCollegeTable();
 
 
 private slots:
     void ChecboxChanged();
     void onPlanClick();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::tripPlanner *ui;

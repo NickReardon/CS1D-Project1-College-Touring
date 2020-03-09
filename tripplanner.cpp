@@ -10,6 +10,7 @@ tripPlanner::tripPlanner(QWidget *parent) :
     ui->setupUi(this);
 
     initializeList();
+    updateCollegeTable();
 }
 
 tripPlanner::~tripPlanner()
@@ -196,4 +197,23 @@ bool tripPlanner::planDoesExist(QString colName) // checks if a college is in th
     }
 
     return false;
+}
+
+void tripPlanner::updateCollegeTable()
+{
+    QSqlQueryModel* model=new QSqlQueryModel();
+
+    QSqlQuery* qry=new QSqlQuery();
+
+    qry->prepare("SELECT distance, endCollege FROM Distances WHERE startCollege = 'Saddleback College'");
+
+    if(qry->exec())
+    {
+        qDebug() << "college table updated.";
+    }
+
+    model->setQuery(*qry);
+
+    ui->sadView->setModel(model);
+    ui->sadView->setColumnWidth(0, 250);
 }
