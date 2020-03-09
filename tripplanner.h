@@ -23,6 +23,8 @@ public:
     bool collegeDoesExist(QString colName);
     bool planDoesExist(QString colName);
     void updateCollegeTable();
+    void updateSouvTable();
+
 
 
 private slots:

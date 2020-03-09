@@ -11,6 +11,7 @@ tripPlanner::tripPlanner(QWidget *parent) :
 
     initializeList();
     updateCollegeTable();
+    updateSouvTable();
 }
 
 tripPlanner::~tripPlanner()
@@ -215,5 +216,24 @@ void tripPlanner::updateCollegeTable()
     model->setQuery(*qry);
 
     ui->sadView->setModel(model);
-    ui->sadView->setColumnWidth(0, 250);
+    ui->sadView->setColumnWidth(20, 250);
+}
+
+void tripPlanner::updateSouvTable()
+{
+    QSqlQueryModel* model=new QSqlQueryModel();
+
+    QSqlQuery* qry=new QSqlQuery();
+
+    qry->prepare("SELECT souvenirName, collegeName FROM Souvenirs");
+
+    if(qry->exec())
+    {
+        qDebug() << "college table updated.";
+    }
+
+    model->setQuery(*qry);
+
+    ui->sadView_2->setModel(model);
+    ui->sadView_2->setColumnWidth(20, 400);
 }
