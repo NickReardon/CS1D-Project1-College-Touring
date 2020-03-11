@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "dbmanager.h"
 #include <qcheckbox.h>
+#include "tripsummary.h"
 namespace Ui {
 class tripPlanner;
 }
@@ -22,6 +23,11 @@ public:
     void planAlgorithm(QString start);
     bool collegeDoesExist(QString colName);
     bool planDoesExist(QString colName);
+    void updateCollegeTable(QString start);
+    void updateSouvTable(QString start);
+    void showTrip(QString ID);
+
+    void updateCombo();
 
 
 private slots:
@@ -31,7 +37,7 @@ private slots:
 private:
     Ui::tripPlanner *ui;
 
-    DbManager myDb = DbManager("C:/Users/Trevor Rizzi/Documents/College-Touring/college.db");
+    DbManager myDb = DbManager(PROJECT_PATH + "/college.db");
     QVector<QCheckBox*> checkBoxVector;
     QStringList selectedColleges; // a string to hold the selected colleges - should be helpful for the plan trip algorithm
 

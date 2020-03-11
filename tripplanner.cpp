@@ -10,11 +10,32 @@ tripPlanner::tripPlanner(QWidget *parent) :
     ui->setupUi(this);
 
     initializeList();
+    updateCombo();
 }
 
 tripPlanner::~tripPlanner()
 {
     delete ui;
+}
+
+void tripPlanner::updateCombo()
+{
+    QSqlQueryModel* model=new QSqlQueryModel();
+
+    QSqlQuery* qry=new QSqlQuery();
+
+    qry->prepare("SELECT DISTINCT startCollege FROM Distances");
+
+    if(qry->exec())
+    {
+        qDebug() << "college1 table updated.";
+    }
+    else
+        qDebug() << "failed";
+
+    model->setQuery(*qry);
+
+    ui->colName->setModel(model);
 }
 
 
@@ -127,17 +148,20 @@ void tripPlanner::onPlanClick()
 {
     QString startingCollege;
     QString tripID;
-    startingCollege = this->ui->colName->text();
+    startingCollege = this->ui->colName->currentText();
     tripID = this->ui->trip->text();
 
     selectedCollegeList();
 
     if(!collegeDoesExist(startingCollege)) // checks if the user input a correct college
     {
-        this->ui->warningLabel->setText("Please enter a college that you have selected!");
+        this->ui->warningLabel->setText("Please enter a college that you have selected on the left!");
     }
     else
     {
+        updateSouvTable(startingCollege);
+        updateCollegeTable(startingCollege);
+
         qDebug() << myDb.tripIdExists(tripID);
         if(tripID.size() == 3 && !myDb.tripIdExists(tripID))
         {
@@ -148,6 +172,9 @@ void tripPlanner::onPlanClick()
             {
                 myDb.addTrip(tripID, plannedColleges[index], index); // uploads trip to DB
             }
+            showTrip(tripID);
+            //tripSummary *summary = new tripSummary(this);
+            //summary->show();
         }
         else
         {
@@ -156,10 +183,16 @@ void tripPlanner::onPlanClick()
 
     }
 
+    for(int i = 0; i < plannedColleges.size(); i++)
+                {
+                    qDebug() << plannedColleges[i];
+                }
+
 }
 
 void tripPlanner::planAlgorithm(QString start)// start is the user selected starting college
 {
+    plannedColleges<< start;
     QSqlQuery *query = new QSqlQuery;
 
     query->prepare("SELECT distance, endCollege FROM Distances WHERE startCollege = (:start) ORDER BY distance ASC");
@@ -173,7 +206,6 @@ void tripPlanner::planAlgorithm(QString start)// start is the user selected star
             QString temp = query->value("endCollege").toString();
             if(!planDoesExist(temp) && collegeDoesExist(temp))
             {
-                plannedColleges<< start;
                 start = query->value("endCollege").toString();
                 planAlgorithm(start); // recursive call
             }
@@ -212,3 +244,75 @@ bool tripPlanner::planDoesExist(QString colName) // checks if a college is in th
 
     return false;
 }
+
+void tripPlanner::updateCollegeTable(QString start)
+{
+    this->ui->collegeLabel->setText("College distances from: " + start);
+    QSqlQueryModel* model=new QSqlQueryModel();
+
+    QSqlQuery* qry=new QSqlQuery();
+
+    qry->prepare("SELECT endCollege, distance FROM Distances WHERE startCollege = (:startCollege)");
+    qry->bindValue(":startCollege", start);
+
+    if(qry->exec())
+    {
+        qDebug() << "college table updated.";
+    }
+
+    model->setQuery(*qry);
+
+    ui->sadView->setModel(model);
+    ui->sadView->setColumnWidth(20, 250);
+}
+
+void tripPlanner::updateSouvTable(QString start)
+{
+    this->ui->souvLabel->setText("Souvenirs at: " + start);
+    QSqlQueryModel* model=new QSqlQueryModel();
+
+    QSqlQuery* qry=new QSqlQuery();
+
+    qry->prepare("SELECT souvenirName FROM Souvenirs WHERE collegeName = (:startCollege)");
+    qry->bindValue(":startCollege", start);
+
+    if(qry->exec())
+    {
+        qDebug() << "college table updated.";
+    }
+    else
+        qDebug() << "failed";
+
+    model->setQuery(*qry);
+
+    ui->sadView_2->setModel(model);
+    ui->sadView_2->setColumnWidth(20, 400);
+
+}
+
+void tripPlanner::showTrip(QString ID)
+{
+    QSqlQueryModel* model=new QSqlQueryModel();
+
+    QSqlQuery* qry=new QSqlQuery();
+    qDebug() << ID;
+
+    qry->prepare("SELECT college FROM Trips WHERE tripID = (:tripId)");
+    qry->bindValue(":tripId" , ID);
+    if(qry->exec())
+    {
+        qDebug() << "trip table updated.";
+    }
+    else
+        qDebug() << "failed trip table";
+
+    model->setQuery(*qry);
+
+    ui->window->setModel(model);
+    ui->window->setColumnWidth(20, 400);
+}
+
+
+
+
+

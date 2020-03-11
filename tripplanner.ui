@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>825</width>
-    <height>569</height>
+    <width>1064</width>
+    <height>669</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,8 +39,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>260</y>
+     <x>340</x>
+     <y>190</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -52,8 +52,8 @@
   <widget class="QLabel" name="startCampusHeader">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>100</y>
+     <x>340</x>
+     <y>10</y>
      <width>221</width>
      <height>16</height>
     </rect>
@@ -65,8 +65,8 @@
   <widget class="QLabel" name="warningLabel">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>200</y>
+     <x>340</x>
+     <y>140</y>
      <width>291</width>
      <height>16</height>
     </rect>
@@ -75,31 +75,31 @@
     <string/>
    </property>
   </widget>
-<widget class="QTableView" name="sadView">
+  <widget class="QTableView" name="sadView">
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>270</y>
-     <width>331</width>
-     <height>281</height>
+     <y>280</y>
+     <width>301</width>
+     <height>241</height>
     </rect>
    </property>
   </widget>
   <widget class="QTableView" name="sadView_2">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>270</y>
-     <width>331</width>
-     <height>281</height>
+     <x>710</x>
+     <y>280</y>
+     <width>141</width>
+     <height>241</height>
     </rect>
    </property>
   </widget>
   <widget class="QLineEdit" name="trip">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>170</y>
+     <x>340</x>
+     <y>100</y>
      <width>113</width>
      <height>20</height>
     </rect>
@@ -108,8 +108,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>150</y>
+     <x>340</x>
+     <y>70</y>
      <width>121</width>
      <height>16</height>
     </rect>
@@ -121,8 +121,8 @@
   <widget class="QLabel" name="tripWarning">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>230</y>
+     <x>340</x>
+     <y>160</y>
      <width>301</width>
      <height>20</height>
     </rect>
@@ -134,14 +134,63 @@
   <widget class="QComboBox" name="colName">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>120</y>
+     <x>340</x>
+     <y>40</y>
      <width>221</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
+  <widget class="QLabel" name="collegeLabel">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>260</y>
+     <width>321</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>College distances from: </string>
+   </property>
   </widget>
+  <widget class="QLabel" name="souvLabel">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>260</y>
+     <width>291</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Souvenirs at: </string>
+   </property>
+  </widget>
+  <widget class="QTableView" name="window">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>30</y>
+     <width>141</width>
+     <height>192</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>10</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>My ordered trip: </string>
+   </property>
+  </widget>
+ </widget>
  <resources/>
  <connections>
   <connection>
