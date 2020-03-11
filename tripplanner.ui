@@ -49,16 +49,6 @@
     <string>Find shortest route!</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="colName">
-   <property name="geometry">
-    <rect>
-     <x>460</x>
-     <y>120</y>
-     <width>301</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="startCampusHeader">
    <property name="geometry">
     <rect>
@@ -69,7 +59,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Enter name of starting campus:</string>
+    <string>Select starting campus:</string>
    </property>
   </widget>
   <widget class="QLabel" name="warningLabel">
@@ -83,6 +73,26 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+<widget class="QTableView" name="sadView">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>270</y>
+     <width>331</width>
+     <height>281</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTableView" name="sadView_2">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>270</y>
+     <width>331</width>
+     <height>281</height>
+    </rect>
    </property>
   </widget>
   <widget class="QLineEdit" name="trip">
@@ -121,7 +131,17 @@
     <string/>
    </property>
   </widget>
- </widget>
+  <widget class="QComboBox" name="colName">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>120</y>
+     <width>221</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  </widget>
  <resources/>
  <connections>
   <connection>
